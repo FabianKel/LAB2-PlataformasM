@@ -1,13 +1,24 @@
 fun main(args: Array<String>) {
     println("Hello World!")
-    var Usuarios = ArrayList<PerfilUsuario>()
     // Try adding program arguments via Run/Debug configuration.
     // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
     println("Program arguments: ${args.joinToString()}")
 
-    fun CargarDatos(){
+    //Lista de Usuarios
+    var usuariosList = mutableListOf<PerfilUsuario>()
 
+    //Muestra Nombre, apellido y Hobby
+    fun MostrarDatos(){
+        for (element in usuariosList) {
+            println((element.Nombres+" ")+(" "+element.Hobbies[0].Título))
+        }
+    }
+
+
+
+    fun CargarDatos(){
         //Crear Lista de datos para ingresar
+        val ids = arrayOf(1,2,3,4,5)
         val names = arrayOf("Derek", "Monica", "Isabella","Giovanni","Gabriela")
         val lstnames = arrayOf("Arreaga","Salvatierra","Miralles","Santos","Mazariegos")
         val urls = arrayOf("url1","url2","url3","url4","url5")
@@ -17,28 +28,34 @@ fun main(args: Array<String>) {
         val estados = arrayOf("Tengo sueño", "Tambien tengo sueño", "Zzz", "Vibin", "Slayin")
 
 
+
         //HOBBIES
-        val hobbiesDeIngreso = listOf<Hobby>()
+        val hobbiesDeIngreso = mutableListOf<Hobby>()
         //Atributos de Hobby
         val Titulos = arrayOf("Deportes", "Musica","Reposteria", "Viajar", "Películas")
         val Descripcion = arrayOf("Jugar y ver deportes", "Escuchar música 24/7", "Hacer cupcakes", "Conocer Guatemala", "Ver películas y series")
         val UrlPhoto  = arrayOf("url1","url2","url3","url4","url5")
 
 
-        //Crear Hobbies en base a las listas
-        for (i in Titulos.indices){
-        //Crear Hobby
-            val Newhob = Hobby(Titulos[i],Descripcion[i],UrlPhoto[i])
-            //Agregar Hobby a la lista 
 
+        //Crear Usuarios y agregarlos a la lista
+        for (i in names.indices){
+
+            //Crear Hobbie en base a las listas
+            val Newhobby = Hobby(Titulos[i],Descripcion[i],UrlPhoto[i])
+
+            //Agregar Hobby a la lista para agregarla como parámetro
+            var hobbies = mutableListOf<Hobby>(Newhobby)
+
+            //Crear Hobby
+            val NewUser = PerfilUsuario(ids[i],names[i],lstnames[i] ,urls[i],edades[i], correos[i],bios[i], estados[i], hobbies)
+            usuariosList.add(NewUser)
         }
 
-
-
-
     }
+
+    //MENU
+    //Cargar datos Default:
     CargarDatos()
-    for (element in Usuarios) {
-        println(element.Apellidos)
-    }
+    MostrarDatos()
 }
